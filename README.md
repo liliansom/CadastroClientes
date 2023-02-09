@@ -25,4 +25,4 @@ Estou disponível para implementar melhorias no programa!
 
 ## Andamento do Projeto:
 Em andamento.<br>
-Data de entrega: 14/02/2023.
+Data de entrega: 12/02/2023.
