@@ -1,51 +1,53 @@
 import tkinter
+import tkinter.ttk
 from tkinter import *
 from tkinter import Canvas
 from tkinter import PhotoImage
 
+
 """class Pessoa:
     def __init__(self, NumCad, cadastro):
         self.Numcad = 0
-        self.cadastro = cadastro()
-        self.endereco = endereco()
-        self.contato = contato()
-    # pessoa
-    def cadastro(self, Nome, DN, Idade, CPF):
         self.nome = Nome
         self.dn = DN
         self.idade = Idade
         self.cpf = CPF
-
-# endereço
-    def endereco(self, CEP, Rua, Numero, Bairro, Complemento):
         self.cep = CEP
         self.rua = Rua
         self.num = Numero
         self.bairro = Bairro
         self.comp = Complemento
-# contatos
-    def contato(self, Telefone1, Telefone2, EMail):
+        self.cid = Cidade
+        self.est = Estado
+        self.pais = País
         self.tel1 = Telefone1
         self.tel2 = Telefone2
         self.email = EMail
 
-class Repositorio:
-    def __init__(self):
-
-    def criar(self):
-
     def adicionar(self):
 
     def procurar(self):
-        ENTRY.insert(
-            0,
-            '{}'.format(busca[4]))
-        ENTRY.insert(
-            '1.0',
-            '{}'.format(busca[5]))
+
     def modificar(self):
 
-    def excluir(self):"""
+    def excluir(self):
+
+class Conexao(object):
+    def __init__(self, connection_string=os.environ["CONN"]): 
+        self.conexao = "Driver={SQL Server};Server=DESKTOP-AB1DE95;Database=BDCadastro;"
+        self.connector = None
+    def __enter__(self): 
+        self.conexao = pyodbc.connect(self.conexao)
+        cursor = self.conexao.cursor()
+        return self
+    def __exit__(self, exc_type, exc_val, exc_tb): 
+        if exc_tb is None:
+            self.conexao.commit()
+        else: 
+            self.conexao.rollback()
+        self.conexao.close()
+        self.cursor.close()
+"""
 
 class Criar(tkinter.Frame):
     def __init__(self, parent):
@@ -56,33 +58,253 @@ class Criar(tkinter.Frame):
         bg = PhotoImage(file='BACKGROUND.png')
         back = Label(image=bg)
         back.place(x=-2, y=0)
+        self.frame = tkinter.Frame(bg='#D4FFF7')
+        self.frame.place(
+            x=0,
+            y=136,
+            width=165,
+            height=1000)
 
-    def texto(self, nomes,  text, x, y):
-        self.nomes = tkinter.Label(text)
-        self.nomes.place(x, y)
+# Botões
+        self.botao = tkinter.Button()
+        self.botao.place(
+            x=20,
+            y=210,
+            height=40,
+            width=120)
+        self.botao.configure(text='Adicionar',font='Jost')
 
-"""    def entry(self):
-        ENTRY = tk.Entry()
-        ENTRY.place()
-    def entry_text(self):
-        EntDesc = tk.Text()
-        EntDesc.place()
+        self.botao1 = tkinter.Button()
+        self.botao1.place(
+            x=20,
+            y=270,
+            height=40,
+            width=120)
+        self.botao1.configure(text='Editar', font='Jost')
 
-    def botao(self):
-        BtProcurar = PhotoImage()
-        btProcurar = tk.Button(
-            image=BtProcurar,
-            command=procurar)
-        btProcurar.place(
-            x=310,
-            y=430)
+        self.botao2 = tkinter.Button()
+        self.botao2.place(
+            x=20,
+            y=330,
+            height=40,
+            width=120)
+        self.botao2.configure(text='Limpar',font='Jost')
 
-    def outrajan(self):
-        toplevel()
-"""
-if __name__ == "__main__":
-    raiz = Tk()
-    raiz.title("LM Cadastro de Clientes")
-    frame = Criar(raiz)
-    raiz.mainloop()
-    raiz.Criar.texto(nomes, text="Nome", x=100, y=100)
+        self.botao3 = tkinter.Button()
+        self.botao3.place(
+            x=20,
+            y=390,
+            height=40,
+            width=120)
+        self.botao3.configure(text='Procurar', font='Jost')
+
+        self.botao4 = tkinter.Button()
+        self.botao4.place(
+            x=20,
+            y=450,
+            height=40,
+            width=120)
+        self.botao4.configure(text='Clientes',font='Jost')
+
+        self.botao5 = tkinter.Button()
+        self.botao5.place(
+            x=20,
+            y=520,
+            height=40,
+            width=120)
+        self.botao5.configure(text='Sair',font='Jost')
+
+# Entradas
+        self.entcad = tkinter.Entry(relief="solid")
+        self.entcad.place(
+            x=200,
+            y=175,
+            width=75,
+            height=30)
+        self.entnome = tkinter.Entry(relief="solid")
+        self.entnome.place(
+            x=300,
+            y=175,
+            width=300,
+            height=30)
+        self.entdn = tkinter.Entry(relief="solid")
+        self.entdn.place(
+            x=620,
+            y=175,
+            width=150,
+            height=30)
+        self.entidade = tkinter.Entry(relief="solid")
+        self.entidade.place(
+            x=820,
+            y=175,
+            width=100,
+            height=30)
+        self.entcpf = tkinter.Entry(relief="solid")
+        self.entcpf.place(
+            x=970,
+            y=175,
+            width=100,
+            height=30)
+        self.entcep = tkinter.Entry(relief="solid")
+        self.entcep.place(
+            x=200,
+            y=275,
+            width=100,
+            height=30)
+        self.entrua = tkinter.Entry(relief="solid")
+        self.entrua.place(
+            x=350,
+            y=275,
+            width=300,
+            height=30)
+        self.entnum = tkinter.Entry(relief="solid")
+        self.entnum.place(
+            x=700,
+            y=275,
+            width=100,
+            height=30)
+        self.entbairro = tkinter.Entry(relief="solid")
+        self.entbairro.place(
+            x=850,
+            y=275,
+            width=220,
+            height=30)
+        self.entcomplem = tkinter.Entry(relief="solid")
+        self.entcomplem.place(
+            x=200,
+            y=350,
+            width=250,
+            height=30)
+        self.entcid = tkinter.Entry(relief="solid")
+        self.entcid.place(
+            x=500,
+            y=350,
+            width=150,
+            height=30)
+        self.entest = tkinter.Entry(relief="solid")
+        self.entest.place(
+            x=700,
+            y=350,
+            width=150,
+            height=30)
+        self.entpais = tkinter.Entry(relief="solid")
+        self.entpais.place(
+            x=900,
+            y=350,
+            width=170,
+            height=30)
+        self.enttel1 = tkinter.Entry(relief="solid")
+        self.enttel1.place(
+            x=200,
+            y=450,
+            width=150,
+            height=30)
+        self.enttel2 = tkinter.Entry(relief="solid")
+        self.enttel2.place(
+            x=425,
+            y=450,
+            width=150,
+            height=30)
+        self.entemail = tkinter.Entry(relief="solid")
+        self.entemail.place(
+            x=650,
+            y=450,
+            width=200,
+            height=30)
+        self.entobs = tkinter.Text(relief="solid")
+        self.entobs.place(
+            x=200,
+            y=525,
+            width=400,
+            height=100)
+        self.entretorna = tkinter.Text(relief="solid")
+        self.entretorna.place(
+            x=770,
+            y=525,
+            width=300,
+            height=100)
+# labels
+        self.labelcad = tkinter.Label(text="Cadastro", background='white')
+        self.labelcad.place(
+            x=198,
+            y=150)
+        self.labelmenu = tkinter.Label(text="Menu", background='#D4FFF7',font='Jost')
+        self.labelmenu.place(
+            x=55,
+            y=160)
+        self.labelnome = tkinter.Label(text="Nome", background='white')
+        self.labelnome.place(
+            x=300,
+            y=150)
+        self.labeldn = tkinter.Label(text="Data de Nascimento", background='white')
+        self.labeldn.place(
+            x=620,
+            y=150)
+        self.labelidade = tkinter.Label(text="Idade", background='white')
+        self.labelidade.place(
+            x=820,
+            y=150)
+        self.labelcpf = tkinter.Label(text="CPF", background='white')
+        self.labelcpf.place(
+            x=970,
+            y=150)
+        self.labelend = tkinter.Label(text="Endereço Residencial", background='white')
+        self.labelend.place(
+            x=198,
+            y=225)
+        self.labelcep = tkinter.Label(text="CEP", background='white')
+        self.labelcep.place(
+            x=198,
+            y=250)
+        self.labelrua = tkinter.Label(text="Logradouro", background='white')
+        self.labelrua.place(
+            x=350,
+            y=250)
+        self.labelnum = tkinter.Label(text="Número", background='white')
+        self.labelnum.place(
+            x=700,
+            y=250)
+        self.labelbairro = tkinter.Label(text="Bairro", background='white')
+        self.labelbairro.place(
+            x=850,
+            y=250)
+        self.labelcomplem = tkinter.Label(text="Complemento", background='white')
+        self.labelcomplem.place(
+            x=198,
+            y=325)
+        self.labelcid = tkinter.Label(text="Cidade", background='white')
+        self.labelcid.place(
+            x=500,
+            y=325)
+        self.labelest = tkinter.Label(text="Estado", background='white')
+        self.labelest.place(
+            x=700,
+            y=325)
+        self.labelest = tkinter.Label(text="País", background='white')
+        self.labelest.place(
+            x=900,
+            y=325)
+        self.labelest = tkinter.Label(text="Contatos", background='white')
+        self.labelest.place(
+            x=200,
+            y=400)
+        self.labeltel1 = tkinter.Label(text="Telefone 1", background='white')
+        self.labeltel1.place(
+            x=200,
+            y=425)
+        self.labeltel2 = tkinter.Label(text="Telefone 1", background='white')
+        self.labeltel2.place(
+            x=425,
+            y=425)
+        self.labelemail= tkinter.Label(text="E-mail", background='white')
+        self.labelemail.place(
+            x=650,
+            y=425)
+        self.labelobs= tkinter.Label(text="Observações", background='white')
+        self.labelobs.place(
+            x=200,
+            y=500)
+        self.labelobs= tkinter.Label(text="Busca", background='white')
+        self.labelobs.place(
+            x=770,
+            y=500)
