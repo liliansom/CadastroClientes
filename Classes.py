@@ -1,53 +1,10 @@
 import tkinter
 import tkinter.ttk
 from tkinter import *
-from tkinter import Canvas
 from tkinter import PhotoImage
+from Pessoa import Pessoa
+import pyodbc
 
-
-"""class Pessoa:
-    def __init__(self, NumCad, cadastro):
-        self.Numcad = 0
-        self.nome = Nome
-        self.dn = DN
-        self.idade = Idade
-        self.cpf = CPF
-        self.cep = CEP
-        self.rua = Rua
-        self.num = Numero
-        self.bairro = Bairro
-        self.comp = Complemento
-        self.cid = Cidade
-        self.est = Estado
-        self.pais = País
-        self.tel1 = Telefone1
-        self.tel2 = Telefone2
-        self.email = EMail
-
-    def adicionar(self):
-
-    def procurar(self):
-
-    def modificar(self):
-
-    def excluir(self):
-
-class Conexao(object):
-    def __init__(self, connection_string=os.environ["CONN"]): 
-        self.conexao = "Driver={SQL Server};Server=DESKTOP-AB1DE95;Database=BDCadastro;"
-        self.connector = None
-    def __enter__(self): 
-        self.conexao = pyodbc.connect(self.conexao)
-        cursor = self.conexao.cursor()
-        return self
-    def __exit__(self, exc_type, exc_val, exc_tb): 
-        if exc_tb is None:
-            self.conexao.commit()
-        else: 
-            self.conexao.rollback()
-        self.conexao.close()
-        self.cursor.close()
-"""
 
 class Criar(tkinter.Frame):
     def __init__(self, parent):
@@ -64,57 +21,61 @@ class Criar(tkinter.Frame):
             y=136,
             width=165,
             height=1000)
+        self.botoes()
+        self.entradas()
+        self.labels()
+        self.clickadc()
 
-# Botões
+    def botoes(self):
         self.botao = tkinter.Button()
         self.botao.place(
-            x=20,
-            y=210,
-            height=40,
-            width=120)
-        self.botao.configure(text='Adicionar',font='Jost')
+                x=20,
+                y=210,
+                height=40,
+                width=120)
+        self.botao.configure(text='Adicionar',font='Jost',command=Criar.clickadc)
 
         self.botao1 = tkinter.Button()
         self.botao1.place(
-            x=20,
-            y=270,
-            height=40,
-            width=120)
+                x=20,
+                y=270,
+                height=40,
+                width=120)
         self.botao1.configure(text='Editar', font='Jost')
 
         self.botao2 = tkinter.Button()
         self.botao2.place(
-            x=20,
-            y=330,
-            height=40,
-            width=120)
+                x=20,
+                y=330,
+                height=40,
+                width=120)
         self.botao2.configure(text='Limpar',font='Jost')
 
         self.botao3 = tkinter.Button()
         self.botao3.place(
-            x=20,
-            y=390,
-            height=40,
-            width=120)
+                x=20,
+                y=390,
+                height=40,
+                width=120)
         self.botao3.configure(text='Procurar', font='Jost')
 
         self.botao4 = tkinter.Button()
         self.botao4.place(
-            x=20,
-            y=450,
-            height=40,
-            width=120)
+                x=20,
+                y=450,
+                height=40,
+                width=120)
         self.botao4.configure(text='Clientes',font='Jost')
 
         self.botao5 = tkinter.Button()
         self.botao5.place(
-            x=20,
-            y=520,
-            height=40,
-            width=120)
+                x=20,
+                y=520,
+                height=40,
+                width=120)
         self.botao5.configure(text='Sair',font='Jost')
 
-# Entradas
+    def entradas(self, Nome):
         self.entcad = tkinter.Entry(relief="solid")
         self.entcad.place(
             x=200,
@@ -127,6 +88,7 @@ class Criar(tkinter.Frame):
             y=175,
             width=300,
             height=30)
+        Nome = self.entnome
         self.entdn = tkinter.Entry(relief="solid")
         self.entdn.place(
             x=620,
@@ -223,7 +185,9 @@ class Criar(tkinter.Frame):
             y=525,
             width=300,
             height=100)
-# labels
+        return Nome
+
+    def labels(self):
         self.labelcad = tkinter.Label(text="Cadastro", background='white')
         self.labelcad.place(
             x=198,
@@ -308,3 +272,17 @@ class Criar(tkinter.Frame):
         self.labelobs.place(
             x=770,
             y=500)
+
+    def getnome(self):
+        nome = Criar.entradas
+
+    def clickadc(self):
+        self.pessoa = Pessoa.adicionar()
+        Criar.entradas.{'entnome'}.get()
+
+
+def main():
+    raiz = Tk()
+    raiz.title("LM Cadastro de Clientes")
+    frame = Criar(raiz)
+    raiz.mainloop()
