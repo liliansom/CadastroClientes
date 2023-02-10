@@ -1,5 +1,6 @@
 from Projeto import Criar
 from tkinter import Tk
+from Pessoa import Pessoa
 
 
 def main():
