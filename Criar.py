@@ -343,23 +343,24 @@ class Criar:
         self.entretorna.delete('1.0', 'end')
 
     # Método para retornar valores para o usuário
-    def inserir(self):
-        self.entcad.insert(0, '{}'.format(self.cad))
-        self.entnome.insert(0, '{}'.format(self.nome))
-        self.entdata.insert(0, '{}'.format(self.data))
-        self.entcpf.insert(0, '{}'.format(self.cpf))
-        self.entcep.insert(0, '{}'.format(self.cep))
-        self.entrua.insert(0, '{}'.format(self.rua))
-        self.entnum.insert(0, '{}'.format(self.num))
-        self.entbairro.insert(0,'{}'.format(self.bairro))
-        self.entcomplem.insert(0, '{}'.format(self.comp))
-        self.entcid.insert(0, '{}'.format(self.cid))
-        self.entest.insert(0, '{}'.format(self.estado))
-        self.entpais.insert(0, '{}'.format(self.pais))
-        self.enttel1.insert(0, '{}'.format(self.tel1))
-        self.enttel2.insert(0, '{}'.format(self.tel2))
-        self.entemail.insert(0, '{}'.format(self.email))
-        self.entobs.insert('1.0', '{}'.format(self.obs))
+
+    def inserir(self, pessoa):
+        self.entcad.insert(0, '{}'.format(pessoa.cad))
+        self.entnome.insert(0, '{}'.format(pessoa.nome))
+        self.entdata.insert(0, '{}'.format(pessoa.data))
+        self.entcpf.insert(0, '{}'.format(pessoa.cpf))
+        self.entcep.insert(0, '{}'.format(pessoa.cep))
+        self.entrua.insert(0, '{}'.format(pessoa.rua))
+        self.entnum.insert(0, '{}'.format(pessoa.num))
+        self.entbairro.insert(0,'{}'.format(pessoa.bairro))
+        self.entcomplem.insert(0, '{}'.format(pessoa.comp))
+        self.entcid.insert(0, '{}'.format(pessoa.cid))
+        self.entest.insert(0, '{}'.format(pessoa.estado))
+        self.entpais.insert(0, '{}'.format(pessoa.pais))
+        self.enttel1.insert(0, '{}'.format(pessoa.tel1))
+        self.enttel2.insert(0, '{}'.format(pessoa.tel2))
+        self.entemail.insert(0, '{}'.format(pessoa.email))
+        self.entobs.insert('1.0', '{}'.format(pessoa.obs))
         return
 
     def clicadc(self):
@@ -382,5 +383,4 @@ class Criar:
         dados = self.buscaent()
         self.pessoa = Pessoa(*dados)
         self.pessoa.procurar()
-        self.inserir()
-
+        self.inserir(self.pessoa)
