@@ -1,4 +1,4 @@
-import tkinter
+mport tkinter
 import tkinter.ttk
 from tkinter import *
 from tkinter import PhotoImage
@@ -6,10 +6,10 @@ from Pessoa import Pessoa
 import pyodbc
 
 
-class Criar(tkinter.Frame):
-    def __init__(self, parent):
+class Criar:
+    def __init__(self, telaprincipal):
+        self.telaprincipal = telaprincipal
         global bg
-        super().__init__(parent)
         self.height = 1440
         self.width = 1025
         bg = PhotoImage(file='BACKGROUND.png')
@@ -24,7 +24,7 @@ class Criar(tkinter.Frame):
         self.botoes()
         self.entradas()
         self.labels()
-        self.clickadc()
+
 
     def botoes(self):
         self.botao = tkinter.Button()
@@ -34,8 +34,7 @@ class Criar(tkinter.Frame):
                 height=40,
                 width=120)
         self.botao.configure(text='Adicionar',
-                             font='Jost',
-                             command=Criar.clickadc)
+                             font='Jost', command=self.clicadc)
 
         self.botao1 = tkinter.Button()
         self.botao1.place(
@@ -51,7 +50,7 @@ class Criar(tkinter.Frame):
                 y=330,
                 height=40,
                 width=120)
-        self.botao2.configure(text='Limpar',font='Jost')
+        self.botao2.configure(text='Limpar',font='Jost', command=self.cliclimpar)
 
         self.botao3 = tkinter.Button()
         self.botao3.place(
@@ -77,21 +76,21 @@ class Criar(tkinter.Frame):
                 width=120)
         self.botao5.configure(text='Sair',font='Jost')
 
-    def entradas(self, Nome):
-        self.entcad = tkinter.Entry(relief="solid")
+    def entradas(self):
+        self.entcad = tkinter.Entry(self.telaprincipal, relief="solid")
         self.entcad.place(
             x=200,
             y=175,
             width=75,
             height=30)
-        self.entnome = tkinter.Entry(relief="solid")
+        self.entnome = tkinter.Entry(self.telaprincipal, relief="solid")
         self.entnome.place(
             x=300,
             y=175,
             width=300,
             height=30)
-        self.entdn = tkinter.Entry(relief="solid")
-        self.entdn.place(
+        self.entdata = tkinter.Entry(self.telaprincipal, relief="solid")
+        self.entdata.place(
             x=620,
             y=175,
             width=150,
@@ -186,7 +185,8 @@ class Criar(tkinter.Frame):
             y=525,
             width=300,
             height=100)
-        return Nome
+        return self
+
 
     def labels(self):
         self.labelcad = tkinter.Label(text="Cadastro", background='white')
@@ -274,18 +274,62 @@ class Criar(tkinter.Frame):
             x=770,
             y=500)
 
-    def getnome(self):
-        nome = Criar.entradas
+    def pegarentrada(self):
+        self.nome = str(self.entnome.get())
+        self.data = str(self.entdata.get())
+        self.cpf = str(self.entcpf.get())
+        self.cep = str(self.entcep.get())
+        self.rua = str(self.entrua.get())
+        self.num = str(self.entnum.get())
+        self.bairro = str(self.entbairro.get())
+        self.comp = str(self.entcomplem.get())
+        self.cid = str(self.entcid.get())
+        self.estado = str(self.entest.get())
+        self.pais = str(self.entpais.get())
+        self.tel1 = str(self.enttel1.get())
+        self.tel2 = str(self.enttel2.get())
+        self.email = str(self.entemail.get())
+        self.obs = str(self.entobs.get('1.0','end'))
+        return self.nome, \
+               self.data, \
+               self.cpf, \
+               self.cep, \
+               self.rua, \
+               self.num, \
+               self.bairro, \
+               self.comp, \
+               self.cid, \
+               self.estado, \
+               self.pais, \
+               self.tel1, \
+               self.tel2, \
+               self.email, \
+               self.obs
 
-    def clickadc(self):
-        self.pessoa = Pessoa.adicionar()
+
+    def clicadc(self):
+        dadosstr = self.pegarentrada()
+        self.pessoa = Pessoa(*dadosstr)
+        self.pessoa.adicionar()
 
 
-def main():
-    raiz = Tk()
-    raiz.title("LM Cadastro de Clientes")
-    frame = Criar(raiz)
-    raiz.mainloop()
-
-if __name__ == '__main__':
-    main()
+    def cliclimpar(self):
+        self.entcad.delete('0', 'end')
+        self.entnome.delete('0','end')
+        self.entdata.delete('0','end')
+        self.entidade.delete('0','end')
+        self.entcpf.delete('0','end')
+        self.entcep.delete('0','end')
+        self.entrua.delete('0','end')
+        self.entnum.delete('0','end')
+        self.entbairro.delete('0','end')
+        self.entcomplem.delete('0','end')
+        self.entcid.delete('0','end')
+        self.entest.delete('0','end')
+        self.entpais.delete('0','end')
+        self.enttel1.delete('0','end')
+        self.enttel2.delete('0','end')
+        self.entemail.delete('0','end')
+        self.entobs.delete('1.0','end')
+        self.entretorna.delete('1.0','end')
+        return
