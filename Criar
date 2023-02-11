@@ -3,10 +3,13 @@ import tkinter.ttk
 from tkinter import *
 from tkinter import PhotoImage
 from Pessoa import Pessoa
+import pyodbc
+
+
+"""Criação do layout do programa"""
 
 
 class Criar:
-    """Criação do layout do programa"""
     def __init__(self, telaprincipal):
         self.telaprincipal = telaprincipal
         global bg
@@ -26,6 +29,7 @@ class Criar:
         self.labels()
 
     def botoes(self):
+        # Criação dos botões
         self.botao = tkinter.Button()
         self.botao.place(
             x=20,
@@ -74,6 +78,8 @@ class Criar:
             height=40,
             width=120)
         self.botao5.configure(text='Sair', font='Jost', command=self.telaprincipal.destroy)
+
+    # Criação das entradas de dados
 
     def entradas(self):
         self.entcad = tkinter.Entry(self.telaprincipal, relief="solid")
@@ -186,7 +192,7 @@ class Criar:
             height=100)
         return self
 
-    def labels(self):
+    def labels(self):  # Criação das etiquetas
         self.labelcad = tkinter.Label(text="Cadastro", background='white')
         self.labelcad.place(
             x=198,
@@ -272,8 +278,7 @@ class Criar:
             x=770,
             y=500)
 
-""" Criação dos métodos auxiliares do programa"""
-    def transformarentrada(self):
+    def trataent(self):
         self.cad = str(self.entcad.get())
         self.nome = str(self.entnome.get())
         self.data = str(self.entdata.get())
@@ -290,11 +295,12 @@ class Criar:
         self.tel2 = str(self.enttel2.get())
         self.email = str(self.entemail.get())
         self.obs = str(self.entobs.get('1.0', 'end'))
-        return self.cad, self.nome, self.data, self.cpf, self.cep, self.rua,\
+        return self.cad, self.nome, self.data, self.cpf, self.cep, self.rua, \
                self.num, self.bairro, self.comp, self.cid, self.estado, \
                self.pais, self.tel1, self.tel2, self.email, self.obs
 
-    def buscarentrada(self):
+    # Método para buscar os valores das entradas
+    def buscaent(self):
         self.cad = self.entcad.get()
         self.nome = self.entnome.get()
         self.data = self.entdata.get()
@@ -311,10 +317,11 @@ class Criar:
         self.tel2 = self.enttel2.get()
         self.email = self.entemail.get()
         self.obs = self.entobs.get('1.0', 'end')
-        return self.cad, self.nome, self.data, self.cpf, self.cep, self.rua,\
+        return self.cad, self.nome, self.data, self.cpf, self.cep, self.rua, \
                self.num, self.bairro, self.comp, self.cid, self.estado, \
                self.pais, self.tel1, self.tel2, self.email, self.obs
-    
+
+    # Método para limpar as entradas
     def limpeza(self):
         self.entcad.delete('0', 'end')
         self.entnome.delete('0', 'end')
@@ -335,41 +342,58 @@ class Criar:
         self.entobs.delete('1.0', 'end')
         self.entretorna.delete('1.0', 'end')
 
+    # Método para retornar valores para o usuário
     def inserir(self):
-        self.entcad.insert(0, '{}'.format(self.busca[0]))
-        self.entnome.insert(0, '{}'.format(self.busca[1]))
-        self.entdata.insert(0, '{}'.format(self.busca[2]))
-        self.entcpf.insert(0, '{}'.format(self.busca[3]))
-        self.entcep.insert(0, '{}'.format(self.busca[4]))
-        self.entrua.insert(0, '{}'.format(self.busca[5]))
-        self.entnum.insert(0, '{}'.format(self.busca[6]))
-        self.entbairro.insert(0,'{}'.format(self.busca[7]))
-        self.entcomplem.insert(0, '{}'.format(self.busca[8]))
-        self.entcid.insert(0, '{}'.format(self.busca[9]))
-        self.entest.insert(0, '{}'.format(self.busca[10]))
-        self.entpais.insert(0, '{}'.format(self.busca[11]))
-        self.enttel1.insert(0, '{}'.format(self.busca[12]))
-        self.enttel2.insert(0, '{}'.format(self.busca[13]))
-        self.entemail.insert(0, '{}'.format(self.busca[14]))
-        self.entobs.insert('1', '{}'.format(self.busca[15]))
+        self.entcad.insert(0, '{}'.format(self.cad))
+        self.entnome.insert(0, '{}'.format(self.nome))
+        self.entdata.insert(0, '{}'.format(self.data))
+        self.entcpf.insert(0, '{}'.format(self.cpf))
+        self.entcep.insert(0, '{}'.format(self.cep))
+        self.entrua.insert(0, '{}'.format(self.rua))
+        self.entnum.insert(0, '{}'.format(self.num))
+        self.entbairro.insert(0,'{}'.format(self.bairro))
+        self.entcomplem.insert(0, '{}'.format(self.comp))
+        self.entcid.insert(0, '{}'.format(self.cid))
+        self.entest.insert(0, '{}'.format(self.estado))
+        self.entpais.insert(0, '{}'.format(self.pais))
+        self.enttel1.insert(0, '{}'.format(self.tel1))
+        self.enttel2.insert(0, '{}'.format(self.tel2))
+        self.entemail.insert(0, '{}'.format(self.email))
+        self.entobs.insert('1.0', '{}'.format(self.obs))
         return
 
-'''Métodos dos botões'''
     def clicadc(self):
-        dadosstr = self.transformarentrada()
+        dadosstr = self.trataent()
         self.pessoa = Pessoa(*dadosstr)
         self.pessoa.adicionar()
 
+    # Método para função do botão limpar
     def cliclimpar(self):
         self.limpeza()
 
+    # Método para função do botão excluir
     def clicdeletar(self):
-        dadosstr = self.transformarentrada()
+        dadosstr = self.trataent()
         self.pessoa = Pessoa(*dadosstr)
         self.pessoa.excluir()
 
+    # Método para função do botão procurar
     def clicprocurar(self):
-        dados = self.buscarentrada()
+        dados = self.buscaent()
         self.pessoa = Pessoa(*dados)
         self.pessoa.procurar()
         self.inserir()
+
+
+def main():
+    raiz = Tk()
+    raiz.title("LM Cadastro de Clientes")
+    raiz.geometry('800x800')
+    Criar(raiz)
+
+    dadosconnect = "Driver={SQL Server};Server=.;Database=BDCadastro;"
+    connection = pyodbc.connect(dadosconnect)
+
+    raiz.mainloop()
+    cursor.close()
+    connection.close()
