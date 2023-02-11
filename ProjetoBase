@@ -9,7 +9,7 @@
   - [X] TEXTOS
   - [X] ENTRADAS
   - [X] BOTÕES
-- [EM ANDAMENTO] ORGANIZAR TAMANHOS E DISTÂNCIAS
+- [FALTAM AJUSTES FINAIS] ORGANIZAR TAMANHOS E DISTÂNCIAS
 - [AO FINAL] INTEGRAR O FRONT-END COM O BACK-END
 
 ## BACK-END
@@ -36,9 +36,9 @@
 
 - [ ] CONSTRUIR OS MÉTODOS
     - [X] ADICIONAR UM CLIENTE
-    - [ ] PROCURAR UM CLIENTE
     - [X] LIMPAR
-    - [EM ANDAMENTO] EXCLUIR UM CADASTRO
+    - [x] EXCLUIR UM CADASTRO
+    - [EM ANDAMENTO ] PROCURAR UM CLIENTE
     - [ ] EDITAR UM CLIENTE
 
 
@@ -49,7 +49,9 @@
 - [EM ANDAMENTO] INTEGRAR BANCO DE DADOS COM O BACK-END
 ## EXTRAS
   - [ ] TOPLEVEL
-  - [ ] UTILIZAR UMA API PARA BUSCAR CEP =D
+  - [ ] UTILIZAR UMA API PARA BUSCAR CEP (Acho difícil acontecer...)
   
 ## DIFICULDADES
-1) Dificuldade em criar a integração dos botões com as entradas dos dados: REALIZADA INTEGRAÇÃO BOTÃO ADICIONAR E LIMPAR.
+1) Dificuldade em criar a integração dos botões com as entradas dos dados:
+1.1) Realizada integração dos botões Adicionar, Limpar, Deletar e Sair. 
+1.2) Botão procurar não funciona de jeito nenhum.
