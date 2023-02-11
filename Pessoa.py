@@ -23,7 +23,11 @@ class Pessoa:
         self.obs = obs
         self.busca = []
 
+
+
     def adicionar(self):
+        dadosconnect = "Driver={SQL Server};Server=.;Database=BDCadastro;"
+        connection = pyodbc.connect(dadosconnect)
         cursor = connection.cursor()
         cursor.execute(f''' INSERT INTO Cadastro2 (Nome, DataNascimento, CPF, CEP, Logradouro, 
         Número, Bairro, Complemento, Cidade, Estado, País, Telefone1, Telefone2, Email, Observação)
@@ -43,8 +47,12 @@ class Pessoa:
                             '{self.email}',
                             '{self.obs}'); ''')
         cursor.commit()
-
+        cursor.close()
+        connection.close()
+        
     def excluir(self):
+        dadosconnect = "Driver={SQL Server};Server=.;Database=BDCadastro;"
+        connection = pyodbc.connect(dadosconnect)
         cursor = connection.cursor()
         # INSERIR MESSAGEBOX PARA CONFIRMAR AÇÃO
         cursor.execute(f''' DELETE FROM 
@@ -52,8 +60,12 @@ class Pessoa:
                             WHERE 
                                 NumCad='{self.cad}'; ''')
         cursor.commit()
-
+        cursor.close()
+        connection.close()
+        
     def procurar(self):
+        dadosconnect = "Driver={SQL Server};Server=.;Database=BDCadastro;"
+        connection = pyodbc.connect(dadosconnect)
         cursor = connection.cursor()
         cursor.execute(f'''
                     SELECT 
@@ -83,6 +95,6 @@ class Pessoa:
         self.obs = str(result[15])
         print(result)
         return self
-
-
-
+        cursor.close()
+        connection.close()
+        
