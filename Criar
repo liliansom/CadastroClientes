@@ -384,16 +384,3 @@ class Criar:
         self.pessoa.procurar()
         self.inserir()
 
-
-def main():
-    raiz = Tk()
-    raiz.title("LM Cadastro de Clientes")
-    raiz.geometry('800x800')
-    Criar(raiz)
-
-    dadosconnect = "Driver={SQL Server};Server=.;Database=BDCadastro;"
-    connection = pyodbc.connect(dadosconnect)
-
-    raiz.mainloop()
-    cursor.close()
-    connection.close()
