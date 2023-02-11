@@ -3,6 +3,8 @@ import pyodbc
 
 # BACK-END
 class Pessoa:
+    dadosconnect = "Driver={SQL Server};Server=.;Database=BDCadastro;"
+
     def __init__(self, cad, nome, data, cpf, cep, rua, num, bairro, comp,
                  cidade, estado, pais, tel1, tel2, email, obs):
         self.cad = cad
@@ -26,8 +28,7 @@ class Pessoa:
 
 
     def adicionar(self):
-        dadosconnect = "Driver={SQL Server};Server=.;Database=BDCadastro;"
-        connection = pyodbc.connect(dadosconnect)
+        connection = pyodbc.connect(self.dadosconnect)
         cursor = connection.cursor()
         cursor.execute(f''' INSERT INTO Cadastro2 (Nome, DataNascimento, CPF, CEP, Logradouro, 
         Número, Bairro, Complemento, Cidade, Estado, País, Telefone1, Telefone2, Email, Observação)
@@ -49,10 +50,9 @@ class Pessoa:
         cursor.commit()
         cursor.close()
         connection.close()
-        
+
     def excluir(self):
-        dadosconnect = "Driver={SQL Server};Server=.;Database=BDCadastro;"
-        connection = pyodbc.connect(dadosconnect)
+        connection = pyodbc.connect(self.dadosconnect)
         cursor = connection.cursor()
         # INSERIR MESSAGEBOX PARA CONFIRMAR AÇÃO
         cursor.execute(f''' DELETE FROM 
@@ -62,10 +62,9 @@ class Pessoa:
         cursor.commit()
         cursor.close()
         connection.close()
-        
+
     def procurar(self):
-        dadosconnect = "Driver={SQL Server};Server=.;Database=BDCadastro;"
-        connection = pyodbc.connect(dadosconnect)
+        connection = pyodbc.connect(self.dadosconnect)
         cursor = connection.cursor()
         cursor.execute(f'''
                     SELECT 
@@ -73,7 +72,7 @@ class Pessoa:
                     FROM 
                         Cadastro2 
                     WHERE
-                        NumCad='{self.cad}' OR Nome='{self.nome}' 
+                        NumCad='{self.cad}' 
 ''')
 
         result = cursor.fetchone()
@@ -93,8 +92,7 @@ class Pessoa:
         self.tel2 = str(result[13])
         self.email = str(result[14])
         self.obs = str(result[15])
-        print(result)
-        return self
         cursor.close()
         connection.close()
-        
+        return self
+
