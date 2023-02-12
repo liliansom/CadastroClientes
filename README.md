@@ -4,7 +4,7 @@ O sistema será desenvolvido em Python utilizando o recurso de CRUD (Create, Rea
 O cadastro de clientes possuirá as seguintes informações: nome, data de nascimento, idade, CPF, Endereço completo, telefones, e-mail.<br>
 Para a construção deste projeto foram utilizados os seguintes recursos:
 
-Site Figma para o design do Front-End;
+Site Figma para o design do Front-End: https://www.figma.com/;<br>
 Ambiente de desenvolvimento integrado PyCharm para programação em Python;
 Bibliotecas pyodbc e tkinter do Python;
 SQL Server Management Studio para administração de todos os componentes do Microsoft SQL Server.
