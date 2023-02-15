@@ -15,8 +15,8 @@ Este projeto foi uma ótima oportunidade para adquirir conhecimentos em Programa
 Um programa para cadastrar seus clientes de forma mais eficaz, sem dificuldades. <br>
 Nele será possível adicionar novos clientes, editar seu cadastro, procurar pelos pacientes por seu nome e deletar um cadastro.
 
-## Esboço do projeto
-![Frame 1](https://user-images.githubusercontent.com/109561962/217059170-41f7c3f5-2725-4c56-8346-d577fe00f841.png)
+## Layout do projeto
+![layout](https://user-images.githubusercontent.com/109561962/218923563-9f013c32-e36d-44a5-abb0-08e61086bf88.jpg)
 
 ## Dúvidas
 Teve alguma dúvida ou dificuldade na utilização do programa?<br>
