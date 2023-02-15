@@ -30,7 +30,7 @@ class Pessoa:
         cursor = connection.cursor()
         cursor.execute(f''' INSERT INTO Cadastro2 (Nome, DataNascimento, CPF, CEP, Logradouro, 
         Número, Bairro, Complemento, Cidade, Estado, País, Telefone1, Telefone2, Email, Observação)
-        Número, Bairro, Complemento, Cidade, Estado, País, Telefone1, Telefone2, Email, Observação)
+        
                             VALUES('{self.nome}', 
                             '{self.data}', 
                             '{self.cpf}',
