@@ -1,6 +1,6 @@
-from Projeto import Criar
+# This is a sample Python script.
+from Projeto import *
 from tkinter import Tk
-from Pessoa import Pessoa
 
 
 def main():
@@ -12,4 +12,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
     

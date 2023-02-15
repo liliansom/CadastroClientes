@@ -25,12 +25,11 @@ class Pessoa:
         self.obs = obs
         self.busca = []
 
-
-
     def adicionar(self):
         connection = pyodbc.connect(self.dadosconnect)
         cursor = connection.cursor()
         cursor.execute(f''' INSERT INTO Cadastro2 (Nome, DataNascimento, CPF, CEP, Logradouro, 
+        Número, Bairro, Complemento, Cidade, Estado, País, Telefone1, Telefone2, Email, Observação)
         Número, Bairro, Complemento, Cidade, Estado, País, Telefone1, Telefone2, Email, Observação)
                             VALUES('{self.nome}', 
                             '{self.data}', 
@@ -72,8 +71,7 @@ class Pessoa:
                     FROM 
                         Cadastro2 
                     WHERE
-                        NumCad='{self.cad}' 
-''')
+                        Nome='{self.nome}' ''')
 
         result = cursor.fetchone()
         self.cad = str(result[0])
@@ -94,5 +92,36 @@ class Pessoa:
         self.obs = str(result[15])
         cursor.close()
         connection.close()
-        return self
+        return
 
+    def editar(self):
+        connection = pyodbc.connect(self.dadosconnect)
+        cursor = connection.cursor()
+        cursor.execute(f'''
+                            UPDATE 
+                                Cadastro2
+                            SET
+                                Nome = '{self.nome}',
+                                DataNascimento = '{self.data}', 
+                                CPF = '{self.cpf}',
+                                CEP = '{self.cep}',
+                                Logradouro = '{self.rua}', 
+                                Número = '{self.num}', 
+                                Bairro = '{self.bairro}', 
+                                Complemento = '{self.comp}', 
+                                Cidade = '{self.cid}', 
+                                Estado = '{self.estado}', 
+                                País = '{self.pais}', 
+                                Telefone1 = '{self.tel1}', 
+                                Telefone2 = '{self.tel2}',
+                                Email = '{self.email}',
+                                Observação = '{self.obs}'
+                                
+                            WHERE
+                                NumCad='{self.cad}' OR Nome='{self.nome}'
+                            ''')
+        cursor.commit()
+        print(f'{self.nome}')
+        cursor.close()
+        connection.close()
+        return

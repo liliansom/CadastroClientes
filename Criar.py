@@ -3,8 +3,6 @@ import tkinter.ttk
 from tkinter import *
 from tkinter import PhotoImage
 from Pessoa import Pessoa
-import pyodbc
-
 
 """Criação do layout do programa"""
 
@@ -45,7 +43,7 @@ class Criar:
             y=270,
             height=40,
             width=120)
-        self.botao1.configure(text='Editar', font='Jost')
+        self.botao1.configure(text='Editar', font='Jost', command=self.cliceditar)
 
         self.botao2 = tkinter.Button()
         self.botao2.place(
@@ -98,19 +96,14 @@ class Criar:
         self.entdata.place(
             x=620,
             y=175,
-            width=150,
+            width=175,
             height=30)
-        self.entidade = tkinter.Entry(relief="solid")
-        self.entidade.place(
-            x=820,
-            y=175,
-            width=100,
-            height=30)
+
         self.entcpf = tkinter.Entry(relief="solid")
         self.entcpf.place(
-            x=970,
+            x=820,
             y=175,
-            width=100,
+            width=250,
             height=30)
         self.entcep = tkinter.Entry(relief="solid")
         self.entcep.place(
@@ -209,13 +202,9 @@ class Criar:
         self.labeldn.place(
             x=620,
             y=150)
-        self.labelidade = tkinter.Label(text="Idade", background='white')
-        self.labelidade.place(
-            x=820,
-            y=150)
         self.labelcpf = tkinter.Label(text="CPF", background='white')
         self.labelcpf.place(
-            x=970,
+            x=820,
             y=150)
         self.labelend = tkinter.Label(text="Endereço Residencial", background='white')
         self.labelend.place(
@@ -345,6 +334,8 @@ class Criar:
     # Método para retornar valores para o usuário
 
     def inserir(self, pessoa):
+        self.entcad.delete('0', 'end')
+        self.entnome.delete('0', 'end')
         self.entcad.insert(0, '{}'.format(pessoa.cad))
         self.entnome.insert(0, '{}'.format(pessoa.nome))
         self.entdata.insert(0, '{}'.format(pessoa.data))
@@ -352,7 +343,7 @@ class Criar:
         self.entcep.insert(0, '{}'.format(pessoa.cep))
         self.entrua.insert(0, '{}'.format(pessoa.rua))
         self.entnum.insert(0, '{}'.format(pessoa.num))
-        self.entbairro.insert(0,'{}'.format(pessoa.bairro))
+        self.entbairro.insert(0, '{}'.format(pessoa.bairro))
         self.entcomplem.insert(0, '{}'.format(pessoa.comp))
         self.entcid.insert(0, '{}'.format(pessoa.cid))
         self.entest.insert(0, '{}'.format(pessoa.estado))
@@ -361,7 +352,6 @@ class Criar:
         self.enttel2.insert(0, '{}'.format(pessoa.tel2))
         self.entemail.insert(0, '{}'.format(pessoa.email))
         self.entobs.insert('1.0', '{}'.format(pessoa.obs))
-        return
 
     def clicadc(self):
         dadosstr = self.trataent()
@@ -384,3 +374,14 @@ class Criar:
         self.pessoa = Pessoa(*dados)
         self.pessoa.procurar()
         self.inserir(self.pessoa)
+
+
+    def cliceditar(self):
+        dados = self.buscaent()
+        self.pessoa = Pessoa(*dados)
+        self.pessoa.procurar()
+        dadosnovos = self.buscaent()
+        self.pessoanova = Pessoa(*dadosnovos)
+        self.pessoanova.editar()
+        print(f'{self.pessoanova}')
+        
