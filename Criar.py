@@ -405,6 +405,7 @@ class Criar:
         self.entbairro.insert(0, '{}'.format(self.residencia.bairro))
         self.entcid.insert(0, '{}'.format(self.residencia.cidade))
         self.entest.insert(0, '{}'.format(self.residencia.estado))
+        self.entpais.insert(0, 'Brasil')
         return
         
         
