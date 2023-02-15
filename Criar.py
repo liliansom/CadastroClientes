@@ -26,6 +26,8 @@ class Criar:
         self.entradas()
         self.labels()
 
+    """Inserir método para criar treeview"""
+
     # Criação dos botões
     def botoes(self):
         self.botao = tkinter.Button()
@@ -362,6 +364,8 @@ class Criar:
         self.entemail.insert(0, '{}'.format(pessoa.email))
         self.entobs.insert('1.0', '{}'.format(pessoa.obs))
 
+    """Inserir método para tratamento da entrada de dados"""
+    
     # Métodos com funções de cada botão 
     # Método para função do botão Adicionar
     def clicadc(self):
