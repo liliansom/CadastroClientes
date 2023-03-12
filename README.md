@@ -1,5 +1,5 @@
 ## Apresentação
-Este é um projeto realizado para Mentoria CSV e consiste em um sistema para cadastro de clientes com interface gráfica utilizando POO.<br>
+Este é um projeto de sistema para cadastro de clientes com interface gráfica utilizando POO.<br>
 O sistema será desenvolvido em Python utilizando o recurso de CRUD (Create, Read, Update, Delete). <br>
 O cadastro de clientes possui as seguintes informações: nome, data de nascimento, CPF, Endereço completo, telefones, e-mail.
 Para a construção deste projeto foram utilizados os seguintes recursos:<br>
